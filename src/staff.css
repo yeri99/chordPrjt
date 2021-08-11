@@ -1,0 +1,16 @@
+.fstVerti {
+    margin-left: 25%;
+}
+.sndVerti {
+    margin-left: 50%;
+}
+.thirdVerti {
+    margin-left: 75%;
+}
+
+.clefImg {
+    position: absolute;
+    margin-left: -30%;
+    margin-top: -15px;  
+    height: 81px;
+}
