@@ -1,25 +1,51 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { OctaveMenu } from './octaveMenu';
-import { ChordMenu } from './chordMenu';
-import { drawStaff } from './staff';
+import { Staves } from './staff';
 
 function App() {
-  const [staves, setStaves] = useState([]);
-  useEffect(()=>{
-    console.log('render');
-  });
-  const staffButtonOnClick = staves.map(staff=>{
+  const [staves, setStaves] = useState([
+    {
+      num: 0,
+      chord : 'none',
+      otave : 'c3'
+    },
+    {
+      num: 1,
+      chord : 'none',
+      otave : 'c3'
+    },
+    {
+      num: 2,
+      chord : 'none',
+      otave : 'c3'
+    },
+    {
+      num: 3,
+      chord : 'none',
+      otave : 'c3'
+    },
+  ]);
+  var staffNum = 3;
+
+  const renderStaff = staves.map(staff=>{
+    staffNum++;
     return (
-      {drawStaff}
+      <Staves staff={staff} key={staff.num}/>
     );
   });
-  const addStaff = (event) =>{
+  const addstaff = (event) => {
     event.preventDefault();
     setStaves([
-      ...staves, {}
+      ...staves,
+      {
+        num: staffNum,
+        chord: 'none',
+        octave: 'c3',
+      }
     ]);
-  }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -32,28 +58,15 @@ function App() {
           <OctaveMenu/>
         </div>
         <div className="App-staff">
-          {drawStaff()}
-        </div>
-        <div className="App-select">
-          <ChordMenu/>
+          {renderStaff}
         </div>
         <div className="App-addStaff">
-          <button onClick={createStaff}>+</button>
+          <button onClick={addstaff}>+</button>
         </div>
       </div>
      
     </div>
   );
-}
-
-function createStaff(event) {
-  event.preventDefault();
-  const newStaff = document.createElement('div');
-  const newText = document.createTextNode('test');
-
-  const newFunc = createContext('<drawStaff />');
-  newStaff.append(newText);
-  document.body.append(newFunc);
 }
 
 

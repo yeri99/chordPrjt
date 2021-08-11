@@ -2,44 +2,41 @@ import './menuStyle.css';
 import React, { useRef } from 'react';
 import { useDetectOutsideClick  } from './useDetectOutsideClick';
 
-export const ChordMenu = () => {
-    const dropdownRef = useRef(null);
-    const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-    const onClick = () => setIsActive(!isActive);
+const chordList = ['C', 'Cm', 'C7', 'D', 'Dm', 'D7', 'E', 'Em', 'E7', 'F', 'Fm', 'F7', 'G', 'Gm', 'G7', 'A', 'Am', 'A7', 'B', 'Bm', 'B7'];
 
+export const ChordMenu = () => {
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
+
+  const renderBtn = chordList.map((chord, i)=>{
     return (
-      <div className="menu-container">
-        <button onClick={onClick} className="menu-trigger">
-          <span>Select Chord</span>
-        </button>
-        <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
-          <ul>
-            <li><button onClick={()=>{onChordBtn('None')}}>None</button></li>
-            <li><button onClick={()=>{onChordBtn('C')}}>C</button></li>
-            <li><button onClick={()=>{onChordBtn('Cm')}}>Cm</button></li>
-            <li><button onClick={()=>{onChordBtn('C7')}}>C7</button></li>
-            <li><button onClick={()=>{onChordBtn('Dm')}}>Dm</button></li>
-            <li><button onClick={()=>{onChordBtn('E')}}>E</button></li>
-            <li><button onClick={()=>{onChordBtn('D')}}>D</button></li>
-            <li><button onClick={()=>{onChordBtn('Em')}}>Em</button></li>
-            <li><button onClick={()=>{onChordBtn('E7')}}>E7</button></li>
-            <li><button onClick={()=>{onChordBtn('F')}}>F</button></li>
-            <li><button onClick={()=>{onChordBtn('Fm')}}>Fm</button></li>
-            <li><button onClick={()=>{onChordBtn('F7')}}>F7</button></li>
-            <li><button onClick={()=>{onChordBtn('G')}}>G</button></li>
-          </ul>
-        </nav>
-      </div>
+      <button className="menu-drop-button" onClick={()=>{onChordBtn(chordList[i])}} chord={chord} key={i}>{chordList[i]}</button>
     );
+  });
+
+  return (
+    <div className="menu-container">
+      <button onClick={onClick} className="menu-trigger"  id='btn'>
+        <span>Select Chord</span>
+      </button>
+      <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+        <ul>
+          <li>{renderBtn}</li>
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 function onChordBtn(text, event) {
-  
-  if(text === 'C'){
-    return(console.log("It is C"));
-  }else if(text === 'Cm'){
-    return(console.log("It is Cm"));
-  }else{
-    return(console.log("none"));
+  const btnElement = document.getElementById('btn');
+  var j;
+  for(j=0; j<chordList.length; j++){
+    if(text === chordList[j]){
+      btnElement.innerText = chordList[j];
+      console.log(chordList[j]+' is clicked');
+    }
   }
 }
+
