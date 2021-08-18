@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import { OctaveMenu } from './octaveMenu';
 import { Staves } from './staff';
+import { CompoMenu } from './autoCompositionMenu';
 
 function App() {
   const [staves, setStaves] = useState([
@@ -52,11 +52,30 @@ function App() {
         <p className="App-name">
           PLAY CHORD
         </p>
+        <div className="App-info">
+          <div className="info-fst">
+            <div>
+              <p>tempo :</p>
+              <input type="text" name="tempo" placeholder="100"/>
+            </div>
+            <div>
+              <p>meter :</p>
+              <input type="text" name="nume" placeholder="4"/>
+              <p>/</p>
+              <input type="text" name="deno" placeholder="4"/>
+            </div>
+            <div>
+              <p>octave :</p>
+              <input type="text" name="octave" placeholder="C3"/>
+            </div>
+          </div>
+          <div className="info-sec">
+            <CompoMenu/>
+          </div>
+        </div>
       </header>
       <div className = "App-body">
-        <div>
-          <OctaveMenu/>
-        </div>
+        
         <div className="App-staff">
           {renderStaff}
         </div>

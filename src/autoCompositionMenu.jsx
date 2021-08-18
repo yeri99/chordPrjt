@@ -2,7 +2,7 @@ import './menuStyle.css';
 import React, { useRef } from 'react';
 import { useDetectOutsideClick  } from './useDetectOutsideClick';
 
-export const OctaveMenu = () => {
+export const CompoMenu = () => {
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
     const onClick = () => setIsActive(!isActive);
@@ -11,13 +11,13 @@ export const OctaveMenu = () => {
     return (
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">
-          <span>Select Octave</span>
+          <span>Composition</span>
         </button>
         <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
-            <li><button>C1</button></li>
-            <li><button>C2</button></li>
-            <li><button>C3</button></li>
+            <li><button>Happy</button></li>
+            <li><button>Sad</button></li>
+            <li><button>Comfortable</button></li>
           </ul>
         </nav>
       </div>

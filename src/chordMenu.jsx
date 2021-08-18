@@ -5,7 +5,7 @@ import { useDetectOutsideClick  } from './useDetectOutsideClick';
 const chordList = ['C', 'Cm', 'C7', 'D', 'Dm', 'D7', 'E', 'Em', 'E7', 'F', 'Fm', 'F7', 'G', 'Gm', 'G7', 'A', 'Am', 'A7', 'B', 'Bm', 'B7'];
 
 export const ChordMenu = () => {
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef();
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
 
