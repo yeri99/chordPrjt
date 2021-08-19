@@ -70,7 +70,7 @@ function App() {
             </div>
           </div>
           <div className="info-sec">
-            <CompoMenu/>
+            < CompoMenu />
           </div>
         </div>
       </header>
