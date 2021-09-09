@@ -8,7 +8,7 @@ import { writeFile } from './midi/midiFileWrite';
 function App() {
   const testStaves = [
     {num: 0,
-    chord: "C7",
+    chord: "C",
     octave:'c3'
     }
   ];
