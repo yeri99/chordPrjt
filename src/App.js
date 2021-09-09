@@ -2,8 +2,16 @@ import React, {useState} from 'react';
 import './App.css';
 import { Staves } from './staff';
 import { CompoMenu } from './autoCompositionMenu';
+import ReactAudioPlayer from 'react-audio-player';
+import { writeFile } from './midi/midiFileWrite';
 
 function App() {
+  const testStaves = [
+    {num: 0,
+    chord: "C7",
+    octave:'c3'
+    }
+  ];
   const [staves, setStaves] = useState([
     {
       num: 0,
@@ -74,13 +82,19 @@ function App() {
           </div>
         </div>
       </header>
+
       <div className = "App-body">
-        
         <div className="App-staff">
           {renderStaff}
         </div>
         <div className="App-addStaff">
           <button onClick={addstaff}>+</button>
+        </div>
+        <div className="App-playMid">
+          <ReactAudioPlayer src="New.mp3" autoPlay controls/>
+        </div>
+        <div>
+          <button onClick={()=>writeFile(testStaves)}>export</button>
         </div>
       </div>
      

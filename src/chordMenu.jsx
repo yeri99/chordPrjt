@@ -5,7 +5,7 @@ import { useDetectOutsideClick  } from './useDetectOutsideClick';
 const chordList = ['C', 'Cm', 'C7', 'D', 'Dm', 'D7', 'E', 'Em', 'E7', 'F', 'Fm', 'F7', 'G', 'Gm', 'G7', 'A', 'Am', 'A7', 'B', 'Bm', 'B7'];
 
 export const ChordMenu = () => {
-  const dropdownRef = useRef();
+  const dropdownRef = useRef([]);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
 
@@ -20,7 +20,7 @@ export const ChordMenu = () => {
       <button onClick={onClick} className="menu-trigger"  id='btn'>
         <span>Select Chord</span>
       </button>
-      <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+      <nav ref={(elem) => (dropdownRef.current[0] = elem)} className={`menu ${isActive ? 'active' : 'inactive'}`}>
         <ul>
           <li>{renderBtn}</li>
         </ul>
