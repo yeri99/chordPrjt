@@ -4,7 +4,7 @@ import searchChord from "./searchChord";
 const dataLen = 4;
 
 export function writeFile(staves){
-
+    
     var buffer = [];
     //header chunk
     var i = 0, j = 0, k = 0, l = 0;
@@ -53,8 +53,8 @@ export function writeFile(staves){
     buffer.push(midiHeader.trackChunk.event.metaEvent.ts_bb);
 
     //track body
-    for(l = 0; l < dataLen; l++){
-        for(i=0; i < staves.length; i++){
+    for(i=0; i < staves.length; i++){
+        for(l = 0; l < dataLen; l++){
             var keyNum = searchChord(staves[i]);
             for(k=0; k<keyNum.length; k++){
                 //note on
@@ -105,6 +105,6 @@ export function writeFile(staves){
     link.download = 'test.mid';
     link.click();
     
-    return(buffer);
+    return(binary);
 
 }

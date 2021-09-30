@@ -72,7 +72,6 @@ export const Staves = ({ staff }) => {
       <HorizonLineSec/>
       <HorizonLineSec/>
       <HorizonLineSec/>
-      <div className="staffButton"><ChordMenu /></div>
     </div>
   );
 };

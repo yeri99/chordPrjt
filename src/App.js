@@ -2,18 +2,22 @@ import React, {useState} from 'react';
 import './App.css';
 import { Staves } from './staff';
 import { CompoMenu } from './autoCompositionMenu';
-import ReactAudioPlayer from 'react-audio-player';
 import { writeFile } from './midi/midiFileWrite';
+import { ChordMenu } from './chordMenu';
 
 function App() {
   const testStaves = [
     {num: 0,
     chord: "C",
     octave:'c3'
+    },
+    {num: 1,
+    chord: "D7",
+    octave: 'c3'
     }
   ];
   const [staves, setStaves] = useState([
-    {
+    {   
       num: 0,
       chord : 'none',
       otave : 'c3'
@@ -26,7 +30,7 @@ function App() {
     {
       num: 2,
       chord : 'none',
-      otave : 'c3'
+      otave : 'c3' 
     },
     {
       num: 3,
@@ -34,12 +38,16 @@ function App() {
       otave : 'c3'
     },
   ]);
-  var staffNum = 3;
+  var staffNum = 0;
 
   const renderStaff = staves.map(staff=>{
     staffNum++;
+    
     return (
-      <Staves staff={staff} key={staff.num}/>
+      <div>
+        <Staves staff={staff} key={staff.num}/>
+        <div className="staffButton"><ChordMenu /></div>
+      </div>
     );
   });
   const addstaff = (event) => {
@@ -53,6 +61,7 @@ function App() {
       }
     ]);
   };
+  
 
   return (
     <div className="App">
@@ -91,7 +100,14 @@ function App() {
           <button onClick={addstaff}>+</button>
         </div>
         <div className="App-playMid">
-          <ReactAudioPlayer src="New.mp3" autoPlay controls/>
+          <button onClick={playMidi}>play</button>
+          <audio src='/Instrument.mid'></audio>
+            <audio
+              controls
+              src="../Instrument.mid">
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
         </div>
         <div>
           <button onClick={()=>writeFile(testStaves)}>export</button>
@@ -100,6 +116,19 @@ function App() {
      
     </div>
   );
+}
+
+function playMidi() {
+  console.log("good");
+  var MidiPlayer = require('midi-player-js');
+  
+  var Player = new MidiPlayer.Player(function(event){
+    console.log(event);
+  });
+
+  Player.loadFile('./Instrument.mid');
+  
+  Player.play();
 }
 
 
